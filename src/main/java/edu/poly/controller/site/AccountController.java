@@ -12,7 +12,7 @@ public class AccountController {
 	public String login() {
 		return "site/account/login-cover";
 	}
-	
+
 	@GetMapping("register")
 	public String register() {
 		return "site/account/register";

@@ -9,5 +9,5 @@ public class CartierWatchApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CartierWatchApplication.class, args);
 	}
-
+	
 }
