@@ -19,6 +19,10 @@ public interface CategoryService {
 
     void flush();
 
+    List<Category> findIsActivated();
+
+    Page<Category> findPaginatedActivated(int page, int size);
+
     Page<Category> findAll(Pageable pageable);
 
     <S extends Category> S saveAndFlush(S entity);

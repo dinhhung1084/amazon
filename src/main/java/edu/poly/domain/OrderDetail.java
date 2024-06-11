@@ -24,7 +24,7 @@ public class OrderDetail implements Serializable {
 	private int orderDetailId;
 	private int quantity;
 	private double price;
-
+	private boolean isActivated;
 	@ManyToOne
 	@JoinColumn(name = "productId")
 	Product product;

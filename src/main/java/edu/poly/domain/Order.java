@@ -28,7 +28,7 @@ public class Order implements Serializable {
 	private Date orderDate;
 	private double amount;
 	private short status;
-
+	private boolean isActivated;
 	@ManyToOne
 	@JoinColumn(name = "customerId")
 	private Customer customer;

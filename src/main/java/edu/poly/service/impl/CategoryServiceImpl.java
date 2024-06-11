@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -32,12 +33,21 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll(sort);
     }
 
+    public List<Category> findIsActivated() {
+        return categoryRepository.findByIsActivatedTrue();
+    }
+
     public void flush() {
         categoryRepository.flush();
     }
 
     public Page<Category> findAll(Pageable pageable) {
         return categoryRepository.findAll(pageable);
+    }
+
+    public Page<Category> findPaginatedActivated(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return categoryRepository.findByIsActivatedTrue(pageable);
     }
 
     // public Page<Category> findAllByNameLike(String keywords, Pageable pageable) {

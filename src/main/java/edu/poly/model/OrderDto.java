@@ -16,4 +16,5 @@ public class OrderDto {
 	private short status;
 	private int customerId;
 
+	private boolean isActivated;
 }

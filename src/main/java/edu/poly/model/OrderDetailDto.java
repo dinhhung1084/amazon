@@ -13,4 +13,6 @@ public class OrderDetailDto {
 	private double price;
 	private int productId;
 	private int orderId;
+
+	private boolean isActivated;
 }

@@ -28,4 +28,5 @@ public class Category implements Serializable {
 	private String description;
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
+	private boolean isActivated;
 }
