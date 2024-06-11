@@ -1,57 +1,62 @@
-// package edu.poly.service;
+package edu.poly.service;
 
-// import java.util.List;
-// import java.util.Optional;
+import java.util.List;
+import java.util.Optional;
 
-// import org.springframework.data.domain.Example;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
-// import edu.poly.domain.Category;
+import edu.poly.domain.Category;
 
-// public interface CategoryService {
+public interface CategoryService {
 
-// 	void deleteAll();
+    <S extends Category> S save(S entity);
 
-// 	void deleteAll(Iterable<? extends Category> entities);
+    <S extends Category> List<S> saveAll(Iterable<S> entities);
 
-// 	void deleteAllById(Iterable<? extends Long> ids);
+    List<Category> findAll(Sort sort);
 
-// 	void delete(Category entity);
+    void flush();
 
-// 	Category getById(Long id);
+    Page<Category> findAll(Pageable pageable);
 
-// 	void deleteById(Long id);
+    <S extends Category> S saveAndFlush(S entity);
 
-// 	long count();
+    <S extends Category> List<S> saveAllAndFlush(Iterable<S> entities);
 
-// 	Category getOne(Long id);
+    List<Category> findAll();
 
-// 	<S extends Category> boolean exists(Example<S> example);
+    List<Category> findAllById(Iterable<Integer> ids);
 
-// 	void deleteAllByIdInBatch(Iterable<Long> ids);
+    void deleteInBatch(Iterable<Category> entities);
 
-// 	boolean existsById(Long id);
+    Optional<Category> findById(Integer id);
 
-// 	Optional<Category> findById(Long id);
+    void deleteAllInBatch(Iterable<Category> entities);
 
-// 	List<Category> findAllById(Iterable<Long> ids);
+    boolean existsById(Integer id);
 
-// 	List<Category> findAll();
+    void deleteAllByIdInBatch(Iterable<Integer> ids);
 
-// 	<S extends Category> List<S> saveAllAndFlush(Iterable<S> entities);
+    void deleteAllInBatch();
 
-// 	<S extends Category> S saveAndFlush(S entity);
+    Category getOne(Integer id);
 
-// 	Page<Category> findAll(Pageable pageable);
+    long count();
 
-// 	void flush();
+    void deleteById(Integer id);
 
-// 	List<Category> findAll(Sort sort);
+    Category getById(Integer id);
 
-// 	<S extends Category> List<S> saveAll(Iterable<S> entities);
+    void delete(Category entity);
 
-// 	<S extends Category> S save(S entity);
+    void deleteAllById(Iterable<? extends Integer> ids);
 
-// }
+    Category getReferenceById(Integer id);
+
+    void deleteAll(Iterable<? extends Category> entities);
+
+    void deleteAll();
+
+}

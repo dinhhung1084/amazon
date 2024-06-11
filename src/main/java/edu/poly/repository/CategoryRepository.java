@@ -7,5 +7,4 @@ import edu.poly.domain.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-
 }
