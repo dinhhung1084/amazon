@@ -15,4 +15,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     Page<Category> findByIsActivatedTrue(Pageable pageable);
 
+    Page<Category> findByNameContainingAndIsActivatedTrue(String keywords, Pageable pageable);
 }

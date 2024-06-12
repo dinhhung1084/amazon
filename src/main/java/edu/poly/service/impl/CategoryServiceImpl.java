@@ -45,15 +45,14 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll(pageable);
     }
 
+    public Page<Category> searchActiveProducts(String keywords, Pageable pageable) {
+        return categoryRepository.findByNameContainingAndIsActivatedTrue(keywords, pageable);
+    }
+
     public Page<Category> findPaginatedActivated(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return categoryRepository.findByIsActivatedTrue(pageable);
     }
-
-    // public Page<Category> findAllByNameLike(String keywords, Pageable pageable) {
-    // return categoryRepository.findAllByNameLike(keywords, pageable);
-    // }
-    // Page<Product> findAllByNameLike(String keywords, Pageable pageable);
 
     public <S extends Category> S saveAndFlush(S entity) {
         return categoryRepository.saveAndFlush(entity);
@@ -77,6 +76,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     public Optional<Category> findById(Integer id) {
         return categoryRepository.findById(id);
+    }
+
+    // delete category
+    public void deactivateCategory(Integer categoryId) {
+        Optional<Category> categoryOpt = categoryRepository.findById(categoryId);
+        if (categoryOpt.isPresent()) {
+            Category category = categoryOpt.get();
+            category.setActivated(false);
+            categoryRepository.save(category);
+        }
     }
 
     public void deleteAllInBatch(Iterable<Category> entities) {

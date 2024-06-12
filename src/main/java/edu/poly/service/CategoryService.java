@@ -23,6 +23,8 @@ public interface CategoryService {
 
     Page<Category> findPaginatedActivated(int page, int size);
 
+    Page<Category> searchActiveProducts(String keywords, Pageable pageable);
+
     Page<Category> findAll(Pageable pageable);
 
     <S extends Category> S saveAndFlush(S entity);
@@ -36,6 +38,8 @@ public interface CategoryService {
     void deleteInBatch(Iterable<Category> entities);
 
     Optional<Category> findById(Integer id);
+
+    void deactivateCategory(Integer categoryId);
 
     void deleteAllInBatch(Iterable<Category> entities);
 

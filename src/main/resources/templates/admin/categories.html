@@ -86,7 +86,7 @@
           class="layout-menu menu-vertical menu bg-menu-theme"
         >
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a th:href="@{/admin/categories/page}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -335,7 +335,7 @@
             >
               <!-- Search -->
 
-              <form th:action="@{/admin/categories/page}" method="post">
+              <form th:action="@{/admin/categories/search}" method="get">
                 <div class="navbar-nav align-items-center">
                   <div class="nav-item d-flex align-items-center">
                     <button type="submit" class="btn btn-link">
@@ -537,7 +537,14 @@
 
               <div class="col-xxl">
                 <div class="card">
-                  <h5 class="card-header">Categories</h5>
+                  <div
+                    class="card-header d-flex align-items-center justify-content-between"
+                  >
+                    <h5 class="card-header">Categories</h5>
+                    <small class="text-danger float-end"
+                      ><span th:text="${message}"></span
+                    ></small>
+                  </div>
                   <div class="table-responsive text-nowrap">
                     <table class="table">
                       <thead>
