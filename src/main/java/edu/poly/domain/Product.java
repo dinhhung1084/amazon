@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
+	@NotNull
 	private String name;
 	private int quantity;
 	private double price;
@@ -32,13 +36,15 @@ public class Product implements Serializable {
 	private String image;
 	private String description;
 	private double discount;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date createDate;
 	private boolean stock; // còn hàng hay không
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	Category category;
+	private Category category;
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails;
 	@OneToMany(mappedBy = "product")
 	private List<CartItem> cartItems;
+
 }

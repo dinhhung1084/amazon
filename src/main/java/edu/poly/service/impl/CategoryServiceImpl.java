@@ -33,6 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findAll(sort);
     }
 
+    //
     public List<Category> findIsActivated() {
         return categoryRepository.findByIsActivatedTrue();
     }

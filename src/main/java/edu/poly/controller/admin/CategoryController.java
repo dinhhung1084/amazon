@@ -39,11 +39,9 @@ public class CategoryController {
 	@RequestMapping("page")
 	public String index(Model model,
 			@RequestParam("p") Optional<Integer> p) {
-
 		int currentPage = p.orElse(0);
 		Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
 		model.addAttribute("categories", page);
-
 		model.addAttribute("category", new Category());
 		return "admin/categories";
 	}
@@ -51,14 +49,12 @@ public class CategoryController {
 	@GetMapping("edit/{categoryId}")
 	public ModelAndView edit(ModelMap model, @PathVariable("categoryId") Integer categoryId,
 			@RequestParam("p") Optional<Integer> p) {
-
 		Optional<Category> opt = categoryService.findById(categoryId);
 		CategoryDto dto = new CategoryDto();
 		if (opt.isPresent()) {
 			Category entity = opt.get();
 			BeanUtils.copyProperties(entity, dto);
 			model.addAttribute("category", dto);
-
 			int currentPage = p.orElse(0);
 			Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
 			model.addAttribute("categories", page);
@@ -89,7 +85,6 @@ public class CategoryController {
 			model.addAttribute("categories", page);
 			return new ModelAndView("/admin/categories", model);
 		}
-
 		Category entity = new Category();
 		BeanUtils.copyProperties(dto, entity);
 		entity.setActivated(true);

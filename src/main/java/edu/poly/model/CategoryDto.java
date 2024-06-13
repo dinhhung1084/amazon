@@ -16,6 +16,5 @@ public class CategoryDto {
 	@Length(min = 5)
 	private String name;
 	private String description;
-	// private boolean isEdit = false;
 	private boolean isActivated;
 }
