@@ -26,7 +26,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Amazon - Admin - Order</title>
+    <title>Amazon - Admin - Order Detail</title>
 
     <meta name="description" content />
 
@@ -243,12 +243,12 @@
                 <div data-i18n="Form Elements">Order mgmt.</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item  active">
+                <li class="menu-item ">
                   <a href="forms-basic-inputs.html" class="menu-link active">
                     <div data-i18n="Basic Inputs">Order</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item  active">
                   <a href="forms-input-groups.html" class="menu-link">
                     <div data-i18n="Input groups">Order Detail</div>
                   </a>
@@ -417,9 +417,11 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Forms/</span> Order Management
+                <span class="text-muted fw-light">Forms/</span> Order Detail
+                Management
               </h4>
-              <div class="col-xxl">
+
+              <!--      <div class="col-xxl">
                 <div class="card mb-4">
                   <div
                     class="card-header d-flex align-items-center justify-content-between">
@@ -480,39 +482,36 @@
                           <input
                             type="text"
                             class="form-control"
-                            id="orderDate"
+                            id="orderDate" 
                             th:field="${order.orderDate}"
                             readonly />
                         </div>
                       </div>
-                      <!-- th:value="${#dates.format(order.orderDate, 'dd-MM-yyyy')}" -->
                       <div class="row justify-content-end">
                         <div class="col-sm-10">
-                          <button type="submit" name="action"
-                            class="btn btn-primary"
+                          <button type="submit"  name="action" class="btn btn-primary"
                             value="saveOrUpdate">
                             Accept
                           </button>
-                          <button type="submit" name="action"
-                            class="btn btn-secondary"
+                          <button type="submit" name="action" class="btn btn-secondary"
                             value="cancel">
                             Cancel
                           </button>
                           <small class="text-danger float-end"><span
-                              th:text="${error}"></span></small>
+                            th:text="${error}"></span></small>
                         </div>
                       </div>
                     </form>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <!-- Categories -->
 
               <div class="col-xxl">
                 <div class="card">
                   <div
                     class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="card-header">Order</h5>
+                    <h5 class="card-header">Order Detail</h5>
                     <small class="text-danger float-end"><span
                         th:text="${message}"></span></small>
                   </div>
@@ -521,60 +520,55 @@
                       <thead>
                         <tr>
                           <th>Order ID</th>
+                          <th>Order Detail ID</th>
                           <th>Customer ID</th>
-                          <th>Order Date</th>
-                          <th>Amount</th>
-                          <th>Status</th>
+                          <th>Quantity</th>
+                          <th>Price</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody class="table-border-bottom-0">
-                        <tr th:each=" order: ${orders.content}">
+                        <tr th:each=" orderDetail: ${orderDetails.content}">
+
                           <td>
-                            <i
-                              class="fab fa-angular fa-lg text-danger me-3"></i>
                             <strong>
-                              <span th:text="${order.orderId}"> </span>
+                              <span th:text="${orderDetail.order.orderId}">
+                              </span>
                             </strong>
                           </td>
-                          <td><span
-                              th:text="${order.customer.customerId}"></span></td>
-                          <td><span
-                              th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy')}"></span></td>
                           <td>
-                            <span th:text="${order.amount}"></span>
+                            <strong>
+                              <span th:text="${orderDetail.orderDetailId}">
+                              </span>
+                            </strong>
                           </td>
                           <td>
-                            <span th:switch="${order.status}">
-                              <span th:case="0"
-                                class="badge bg-label-warning me-1">Cancelled</span>
-                              <span th:case="1"
-                                class="badge bg-label-primary me-1">Pending</span>
-                              <span th:case="2"
-                                class="badge bg-label-success me-1">Completed</span>
+                            <span
+                              th:text="${orderDetail.product.productId}"></span>
+                          </td>
 
-                            </span>
+                          <td>
+                            <span th:text="${orderDetail.quantity}"></span>
+                          </td>
+                          <td>
+                            <span th:text="${orderDetail.price}"></span>
                           </td>
                           <td>
                             <div class="dropdown">
                               <button
                                 type="button"
-                                class="btn p-0 dropdown-toggle hide-arrow"
+                                class="btn p-0 dropdown-toggle hide-arrow"orderDetails
                                 data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                               </button>
                               <div class="dropdown-menu">
                                 <a
                                   class="dropdown-item"
-                                  th:href="@{'/admin/orders/edit/' + ${order.orderId}}"><i
-                                    class="bx bx-edit-alt me-1"></i> Edit</a>
+                                  th:href="@{'/admin/orders/edit/' + ${orderDetail.order.orderId}}"><i
+                                    class="bx bx-edit-alt me-1"></i> View Order</a>
                                 <a
                                   class="dropdown-item"
-                                  th:href="@{/admin/orderDetails/page}"><i
-                                    class="bx bx-edit-alt me-1"></i> View Order Detail</a>
-                                <a
-                                  class="dropdown-item"
-                                  th:href="@{'/admin/orders/delete/' + ${order.orderId}}"><i
+                                  th:href="@{'/admin/orderDetails/delete/' + ${orderDetail.orderDetailId}}"><i
                                     class="bx bx-trash me-1"></i> Delete</a>
                               </div>
                             </div>
@@ -586,14 +580,14 @@
                     <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-center">
                         <li class="page-item">
-                          <th:block th:if="${orders.number > 0}">
+                          <th:block th:if="${orderDetails.number > 0}">
                             <a
                               class="page-link"
-                              th:href="@{'/orders/page?p=0'}">First</a>
+                              th:href="@{'/orderDetails/page?p=0'}">First</a>
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:unless="${orders.number > 0}">
+                          <th:block th:unless="${orderDetails.number > 0}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -601,14 +595,14 @@
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:if="${orders.number > 0}">
+                          <th:block th:if="${orderDetails.number > 0}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/orders/page?p=' + ${orders.number - 1}}">Previous</a>
+                              th:href="@{'/admin/orderDetails/page?p=' + ${orderDetails.number - 1}}">Previous</a>
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:unless="${orders.number > 0}">
+                          <th:block th:unless="${orderDetails.number > 0}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -617,15 +611,15 @@
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:if="${orders.number < orders.totalPages - 1}">
+                            th:if="${orderDetails.number < orderDetails.totalPages - 1}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/orders/page?p=' + ${orders.number + 1}}">Next</a>
+                              th:href="@{'/admin/orderDetails/page?p=' + ${orderDetails.number + 1}}">Next</a>
                           </th:block>
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:unless="${orders.number < orders.totalPages - 1}">
+                            th:unless="${orderDetails.number < orderDetails.totalPages - 1}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -634,15 +628,15 @@
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:if="${orders.number < orders.totalPages - 1}">
+                            th:if="${orderDetails.number < orderDetails.totalPages - 1}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/orders/page?p=' + ${orders.totalPages - 1}}">Last</a>
+                              th:href="@{'/admin/orderDetails/page?p=' + ${orderDetails.totalPages - 1}}">Last</a>
                           </th:block>
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:unless="${orders.number < orders.totalPages - 1}">
+                            th:unless="${orderDetails.number < orderDetails.totalPages - 1}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"

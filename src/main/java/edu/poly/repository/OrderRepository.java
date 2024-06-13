@@ -10,6 +10,4 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     Page<Order> findByIsActivatedTrue(Pageable pageable);
 
-    // Page<Product> findByNameContainingAndIsActivatedTrue(String keywords,
-    // Pageable pageable);
 }

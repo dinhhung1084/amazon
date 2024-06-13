@@ -38,7 +38,7 @@ public class Product implements Serializable {
 	private double discount;
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date createDate;
-	private boolean stock; // còn hàng hay không
+	private boolean stock;
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
