@@ -3,6 +3,7 @@ package edu.poly.model;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,10 +21,13 @@ public class ProductDto {
 	private double price;
 	private double weight;
 	private String image;
+	//
+	private MultipartFile imgFile;
 	private String description;
 	private double discount;
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date createDate;
 	private boolean stock;
 	private int categoryId;
+
 }

@@ -13,7 +13,7 @@ public interface OrderDetailService {
 
     Page<OrderDetail> findPaginatedActivated(int page, int size);
 
-    void deactivateOrder(Integer orderId);
+    void deactivateOrderDetail(Integer orderId);
 
     <S extends OrderDetail> S save(S entity);
 

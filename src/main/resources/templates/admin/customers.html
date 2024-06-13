@@ -26,7 +26,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Amazon - Admin - Product</title>
+    <title>Amazon - Admin - Account</title>
 
     <meta name="description" content />
 
@@ -79,7 +79,7 @@
           id="layout-menu"
           class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a th:href="@{/admin/products/page}" class="app-brand-link">
+            <a th:href="@{/admin/dashboard}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -161,107 +161,45 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="index.html" class="menu-link">
+              <a th:href="@{/admin/dashboard}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
 
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Pages</span>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-account.html"
-                    class="menu-link">
-                    <div data-i18n="Account">Account</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-notifications.html"
-                    class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-connections.html"
-                    class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="auth-login-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Login</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-register-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Register</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-forgot-password-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Forgot Password</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
 
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Forms &amp; Tables</span>
             </li>
             <!-- Forms -->
-            <li class="menu-item">
+
+             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Elements">Form Elements</div>
+                <div data-i18n="Form Elements">Order mgmt.</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="forms-basic-inputs.html" class="menu-link">
-                    <div data-i18n="Basic Inputs">Basic Inputs</div>
+                <li class="menu-item ">
+                  <a th:href="@{/admin/orders/page}"  class="menu-link">
+                    <div data-i18n="Basic Inputs">Order</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="forms-input-groups.html" class="menu-link">
-                    <div data-i18n="Input groups">Input groups</div>
+                <li class="menu-item ">
+                  <a th:href="@{/admin/orderDetails/page}"  class="menu-link">
+                    <div data-i18n="Input groups">Order Detail</div>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item active open">
+
+            <li class="menu-item  ">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
                 <div data-i18n="Form Layouts">Product mgmt.</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item  active">
+                <li class="menu-item">
                   <a th:href="@{/admin/products/page}" class="menu-link">
                     <div data-i18n="Vertical Form">Products</div>
                   </a>
@@ -274,10 +212,10 @@
               </ul>
             </li>
             <!-- Tables -->
-            <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+            <li class="menu-item  active">
+              <a th:href="@{/admin/customers/page}"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables</div>
+                <div data-i18n="Tables">Customer</div>
               </a>
             </li>
           </ul>
@@ -305,7 +243,7 @@
               id="navbar-collapse">
               <!-- Search -->
 
-              <form th:action="@{/admin/products/search}" method="get">
+              <form th:action="@{/admin/customers/search}" method="get">
                 <div class="navbar-nav align-items-center">
                   <div class="nav-item d-flex align-items-center">
                     <button type="submit" class="btn btn-link">
@@ -406,7 +344,7 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="fw-bold py-3 mb-4">
-                <span class="text-muted fw-light">Forms/</span> Product
+                <span class="text-muted fw-light">Forms/</span> Customer
                 Management
               </h4>
 
@@ -418,40 +356,27 @@
                 <div class="card mb-4">
                   <div
                     class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Add New Product</h5>
+                    <h5 class="mb-0">Add New Customer</h5>
                   </div>
                   <div class="card-body">
                     <form
-                      th:action="@{/admin/products/saveOrUpdate}"
+                      th:action="@{/admin/customers/saveOrUpdate}"
                       method="post"
-                      th:object="${product}">
+                      th:object="${customer}"
+                      enctype="multipart/form-data"
+                      >
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
-                          for="basic-default-name">Product ID:</label>
+                          for="basic-default-name">Customer ID:</label>
                         <div class="col-sm-10">
                           <input
                             type="text"
                             class="form-control"
                             id="basic-default-name"
                             placeholder="Number"
-                            th:field="*{productId}"
+                            th:field="*{customerId}"
                             readonly />
-                        </div>
-                      </div>
-
-                      <div class="row mb-3">
-                        <label
-                          class="col-sm-2 col-form-label"
-                          for="basic-default-name">Category ID:</label>
-                        <div class="col-sm-10">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="basic-default-name"
-                            placeholder="Number"
-                            th:field="*{category.categoryId}"
-                             />
                         </div>
                       </div>
 
@@ -473,71 +398,58 @@
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
-                          for="basic-default-name">Quantity</label>
+                          for="basic-default-name">Username</label>
                         <div class="col-sm-10">
                           <input
                             type="text"
                             class="form-control"
                             id="basic-default-name"
                             placeholder="Shampoo"
-                            th:field="*{quantity}" />
+                            th:field="*{username}" />
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
-                          for="basic-default-name">Price</label>
+                          for="basic-default-name">Password</label>
                         <div class="col-sm-10">
                           <input
                             type="text"
                             class="form-control"
                             id="basic-default-name"
                             placeholder="Shampoo"
-                            th:field="*{price}" />
+                            th:field="*{password}" />
                         </div>
                       </div>
 
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
-                          for="basic-default-name">Weight</label>
+                          for="basic-default-name">Email</label>
                         <div class="col-sm-10">
                           <input
                             type="text"
                             class="form-control"
                             id="basic-default-name"
                             placeholder="Shampoo"
-                            th:field="*{weight}" />
+                            th:field="*{email}" />
                         </div>
                       </div>
 
-                      <!-- <div class="mb-3 row">
+                      <div class="row mb-3">
                         <label
-                          for="html5-date-input"
-                          class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-10">
+                          class="col-sm-2 col-form-label"
+                          for="basic-default-name">Phone Number</label>
+                        <div class="col-sm-10">
                           <input
+                            type="text"
                             class="form-control"
-                            type="date"
-                            id="html5-date-input"
-                            th:value="${createDate}"
-                             />
+                            id="basic-default-name"
+                            placeholder="Shampoo"
+                            th:field="*{phoneNumber}" />
                         </div>
-                      </div> -->
-
-                      <!-- <div class="mb-3 row">
-                        <label for="date" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-10">
-                            <input class="form-control" type="date" id="date" th:value="${#dates.format(product.createDate, 'dd-MM-yyyy')}" />
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="mb-3">
-                        <label for="formFile" class="form-label">Images</label>
-                        <input class="form-control" type="file" id="formFile"
-                          th:field="${image}" />
-                      </div> -->
+                      </div>
 
                       <div class="row mb-3">
                         <label
@@ -545,54 +457,13 @@
                           for="basic-default-name">Image</label>
                         <div class="col-sm-10">
                           <input
-                            type="text"
+                            type="file"
+                            name="imgFile"
                             class="form-control"
                             id="basic-default-name"
-                            placeholder="Shampoo"
-                            th:field="*{image}" />
+                            />
                         </div>
                       </div>
-
-                      <div class="row mb-3">
-                        <label
-                          class="col-sm-2 col-form-label"
-                          for="basic-default-name">Discount</label>
-                        <div class="col-sm-10">
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="basic-default-name"
-                            placeholder="Shampoo"
-                            th:field="*{discount}" />
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label
-                          class="col-sm-2 col-form-label"
-                          for="basic-default-message">Discription</label>
-                        <div class="col-sm-10">
-                          <textarea
-                            id="basic-default-message"
-                            class="form-control"
-                            placeholder="This is used to help clean hair"
-                            aria-label="This is used to help clean hair"
-                            aria-describedby="basic-icon-default-message2"
-                            th:field="*{description}"></textarea>
-                        </div>
-                      </div>
-
-                      <!-- <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          th:field="${stock}"
-                          value
-                          id="defaultCheck3"
-                          checked />
-                        <label class="form-check-label" for="defaultCheck3">
-                          Checked
-                        </label>
-                      </div> -->
 
                       <div class="row justify-content-end">
                         <div class="col-sm-10">
@@ -603,7 +474,7 @@
                             Reset
                           </button>
                           <small
-                            th:if="${#fields.hasErrors('name') or #fields.hasErrors('quantity') or #fields.hasErrors('price') or #fields.hasErrors('weight') or #fields.hasErrors('createDate')}"
+                            th:if="${#fields.hasErrors('name') or #fields.hasErrors('username') or #fields.hasErrors('password')}"
                             class="text-danger float-end">Please complete
                             form!</small>
                         </div>
@@ -619,7 +490,7 @@
                 <div class="card">
                   <div
                     class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="card-header">Product</h5>
+                    <h5 class="card-header">Customer</h5>
                     <small class="text-danger float-end"><span
                         th:text="${message}"></span></small>
                   </div>
@@ -627,49 +498,31 @@
                     <table class="table">
                       <thead>
                         <tr>
-                          <th>Product ID</th>
-                          <th>Category ID</th>
+                          <th>Customer ID</th>
                           <th>Name</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
-                          <th>Weight</th>
+                          <th>User Name</th>
+                          <th>Password</th>
+                          <th>Phone Number</th>
+                          <th>Email</th>
                           <th>Image</th>
-                          <th>Description</th>
-                          <th>Discount</th>
-                          <th>Create Date</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody class="table-border-bottom-0">
-                        <tr th:each=" product: ${products.content}">
+                        <tr th:each=" customer: ${customers.content}">
                           <td>
                             <i
                               class="fab fa-angular fa-lg text-danger me-3"></i>
                             <strong>
-                              <span th:text="${product.productId}"> </span>
+                              <span th:text="${customer.customerId}"> </span>
                             </strong>
                           </td>
-                          <td>
-                            <i
-                              class="fab fa-angular fa-lg text-danger me-3"></i>
-                            <strong>
-                              <span th:text="${product.category.categoryId}"> </span>
-                            </strong>
-                          </td>
-
-                          <td><span th:text="${product.name}"></span></td>
-                          <td><span th:text="${product.quantity}"></span></td>
-                          <td><span th:text="${product.price}"></span></td>
-                          <td><span th:text="${product.weight}"></span></td>
-                          <td><span th:text="${product.image}"></span></td>
-
-                          <td>
-                            <span th:text="${product.description}"></span>
-                          </td>
-                          <td><span th:text="${product.discount}"></span></td>
-                          <td><span th:text="${#dates.format(product.createDate, 'dd-MM-yyyy')}"></span></td>
-                          <!-- <td><span th:text="${product.createDate}"></span></td> -->
-
+                          <td><span th:text="${customer.name}"></span></td>
+                          <td><span th:text="${customer.username}"></span></td>
+                          <td><span th:text="${customer.password}"></span></td>
+                          <td><span th:text="${customer.phoneNumber}"></span></td>
+                          <td><span th:text="${customer.email}"></span></td>
+                          <td><img style="width: 75px" th:src="@{'/images/' + ${customer.photo}}" alt=""></td>
                           <td>
                             <div class="dropdown">
                               <button
@@ -681,11 +534,11 @@
                               <div class="dropdown-menu">
                                 <a
                                   class="dropdown-item"
-                                  th:href="@{'/admin/products/edit/' + ${product.productId}}"><i
+                                  th:href="@{'/admin/customers/edit/' + ${customer.customerId}}"><i
                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                                 <a
                                   class="dropdown-item"
-                                  th:href="@{'/admin/products/delete/' + ${product.productId}}"><i
+                                  th:href="@{'/admin/customers/delete/' + ${customer.customerId}}"><i
                                     class="bx bx-trash me-1"></i> Delete</a>
                               </div>
                             </div>
@@ -697,14 +550,14 @@
                     <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-center">
                         <li class="page-item">
-                          <th:block th:if="${products.number > 0}">
+                          <th:block th:if="${customers.number > 0}">
                             <a
                               class="page-link"
-                              th:href="@{'/products/page?p=0'}">First</a>
+                              th:href="@{'/customers/page?p=0'}">First</a>
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:unless="${products.number > 0}">
+                          <th:block th:unless="${customers.number > 0}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -712,14 +565,14 @@
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:if="${products.number > 0}">
+                          <th:block th:if="${customers.number > 0}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/products/page?p=' + ${products.number - 1}}">Previous</a>
+                              th:href="@{'/admin/customers/page?p=' + ${customers.number - 1}}">Previous</a>
                           </th:block>
                         </li>
                         <li class="page-item">
-                          <th:block th:unless="${products.number > 0}">
+                          <th:block th:unless="${customers.number > 0}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -728,15 +581,15 @@
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:if="${products.number < products.totalPages - 1}">
+                            th:if="${customers.number < customers.totalPages - 1}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/products/page?p=' + ${products.number + 1}}">Next</a>
+                              th:href="@{'/admin/customers/page?p=' + ${customers.number + 1}}">Next</a>
                           </th:block>
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:unless="${products.number < products.totalPages - 1}">
+                            th:unless="${customers.number < customers.totalPages - 1}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"
@@ -745,15 +598,15 @@
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:if="${products.number < products.totalPages - 1}">
+                            th:if="${customers.number < customers.totalPages - 1}">
                             <a
                               class="page-link"
-                              th:href="@{'/admin/products/page?p=' + ${products.totalPages - 1}}">Last</a>
+                              th:href="@{'/admin/customers/page?p=' + ${customers.totalPages - 1}}">Last</a>
                           </th:block>
                         </li>
                         <li class="page-item">
                           <th:block
-                            th:unless="${products.number < products.totalPages - 1}">
+                            th:unless="${customers.number < customers.totalPages - 1}">
                             <a
                               class="page-link"
                               href="javascript:void(0)"

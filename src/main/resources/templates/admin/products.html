@@ -79,7 +79,7 @@
           id="layout-menu"
           class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a th:href="@{/admin/products/page}" class="app-brand-link">
+            <a th:href="@{/admin/dashboard}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -161,76 +161,12 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="index.html" class="menu-link">
+              <a th:href="@{/admin/dashboard}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
 
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Pages</span>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-account.html"
-                    class="menu-link">
-                    <div data-i18n="Account">Account</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-notifications.html"
-                    class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-connections.html"
-                    class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="auth-login-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Login</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-register-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Register</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-forgot-password-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Forgot Password</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
 
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase">
@@ -240,17 +176,17 @@
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
-                <div data-i18n="Form Elements">Form Elements</div>
+                <div data-i18n="Form Elements">Order mgmt.</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="forms-basic-inputs.html" class="menu-link">
-                    <div data-i18n="Basic Inputs">Basic Inputs</div>
+                  <a th:href="@{/admin/orders/page}" class="menu-link">
+                    <div data-i18n="Basic Inputs">Order</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="forms-input-groups.html" class="menu-link">
-                    <div data-i18n="Input groups">Input groups</div>
+                  <a th:href="@{/admin/orderDetails/page}"class="menu-link">
+                    <div data-i18n="Input groups">Order Detail</div>
                   </a>
                 </li>
               </ul>
@@ -275,9 +211,9 @@
             </li>
             <!-- Tables -->
             <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+              <a th:href="@{/admin/customers/page}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Tables">Tables</div>
+                <div data-i18n="Tables">Account</div>
               </a>
             </li>
           </ul>
@@ -424,7 +360,9 @@
                     <form
                       th:action="@{/admin/products/saveOrUpdate}"
                       method="post"
-                      th:object="${product}">
+                      th:object="${product}"
+                      enctype="multipart/form-data"
+                      >
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
@@ -512,44 +450,17 @@
                         </div>
                       </div>
 
-                      <!-- <div class="mb-3 row">
-                        <label
-                          for="html5-date-input"
-                          class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-10">
-                          <input
-                            class="form-control"
-                            type="date"
-                            id="html5-date-input"
-                            th:value="${createDate}"
-                             />
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="mb-3 row">
-                        <label for="date" class="col-md-2 col-form-label">Date</label>
-                        <div class="col-md-10">
-                            <input class="form-control" type="date" id="date" th:value="${#dates.format(product.createDate, 'dd-MM-yyyy')}" />
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="mb-3">
-                        <label for="formFile" class="form-label">Images</label>
-                        <input class="form-control" type="file" id="formFile"
-                          th:field="${image}" />
-                      </div> -->
-
                       <div class="row mb-3">
                         <label
                           class="col-sm-2 col-form-label"
                           for="basic-default-name">Image</label>
                         <div class="col-sm-10">
                           <input
-                            type="text"
+                            type="file"
+                            name="imgFile"
                             class="form-control"
                             id="basic-default-name"
-                            placeholder="Shampoo"
-                            th:field="*{image}" />
+                            />
                         </div>
                       </div>
 
@@ -580,19 +491,6 @@
                             th:field="*{description}"></textarea>
                         </div>
                       </div>
-
-                      <!-- <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          th:field="${stock}"
-                          value
-                          id="defaultCheck3"
-                          checked />
-                        <label class="form-check-label" for="defaultCheck3">
-                          Checked
-                        </label>
-                      </div> -->
 
                       <div class="row justify-content-end">
                         <div class="col-sm-10">
@@ -661,8 +559,9 @@
                           <td><span th:text="${product.quantity}"></span></td>
                           <td><span th:text="${product.price}"></span></td>
                           <td><span th:text="${product.weight}"></span></td>
-                          <td><span th:text="${product.image}"></span></td>
 
+                          <!-- <td><span th:text="${product.image}"></span></td> -->
+                          <td><img style="width: 75px" th:src="@{'/images/' + ${product.image}}" alt=""></td>
                           <td>
                             <span th:text="${product.description}"></span>
                           </td>

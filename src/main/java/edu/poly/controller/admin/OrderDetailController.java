@@ -32,57 +32,15 @@ public class OrderDetailController {
 		return "admin/orderDetails";
 	}
 
-	// @GetMapping("edit/{orderDetailId}")
-	// public ModelAndView edit(ModelMap model, @PathVariable("orderDetailId")
-	// Integer orderDetailId,
-	// @RequestParam("p") Optional<Integer> p) {
-	// Optional<OrderDetail> opt = orderDetailService.findById(orderDetailId);
-	// if (opt.isPresent()) {
-	// OrderDetail entity = opt.get();
-	// model.addAttribute("orderDetails", entity);
-	// int currentPage = p.orElse(0);
-	// Page<OrderDetail> page =
-	// orderDetailService.findPaginatedActivated(currentPage, 5);
-	// model.addAttribute("orderDetails", page);
-	// return new ModelAndView("admin/orderDetails", model);
-	// }
-	// model.addAttribute("message", "Order Detail is not existed");
-	// return new ModelAndView("forward:admin/orderDetails", model);
-	// }
-
 	@GetMapping("delete/{orderDetailId}")
 	public ModelAndView delete(ModelMap model, @PathVariable("orderDetailId") Integer orderDetailId,
 			@RequestParam("p") Optional<Integer> p) {
-		orderDetailService.deactivateOrder(orderDetailId);
+		orderDetailService.deactivateOrderDetail(orderDetailId);
 		int currentPage = p.orElse(0);
 		Page<OrderDetail> page = orderDetailService.findPaginatedActivated(currentPage, 5);
 		model.addAttribute("orderDetails", page);
 		model.addAttribute("message", "Order Detail is deleted");
 		return new ModelAndView("admin/orderDetails", model); // return to file
 	}
-
-	// @RequestMapping(value = "update")
-	// public ModelAndView saveOrUpdate(ModelMap model, @Valid
-	// @ModelAttribute("orderDetail") OrderDetail entity,
-	// BindingResult result, @RequestParam("p") Optional<Integer> p,
-	// @RequestParam("action") String action) {
-	// if (result.hasErrors()) {
-	// int currentPage = p.orElse(0);
-	// Page<OrderDetail> page =
-	// orderDetailService.findPaginatedActivated(currentPage, 5);
-	// model.addAttribute("orderDetails", page);
-	// model.addAttribute("error", "There was an error processing your request.");
-	// return new ModelAndView("/admin/orderDetails", model);
-	// }
-	// if (action.equals("saveOrUpdate")) {
-	// entity.set((short) 2);
-	// } else if (action.equals("cancel")) {
-	// entity.setStatus((short) 0);
-
-	// }
-	// entity.setActivated(true);
-	// orderService.save(entity);
-	// return new ModelAndView("redirect:/admin/orders/page", model);
-	// }
 
 }

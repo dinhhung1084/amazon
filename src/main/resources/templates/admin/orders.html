@@ -79,7 +79,7 @@
           id="layout-menu"
           class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a th:href="@{/admin/categories/page}" class="app-brand-link">
+            <a  th:href="@{/admin/dashboard}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -161,77 +161,13 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item">
-              <a href="index.html" class="menu-link">
+              <a  th:href="@{/admin/dashboard}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
 
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Pages</span>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-account.html"
-                    class="menu-link">
-                    <div data-i18n="Account">Account</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-notifications.html"
-                    class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="pages-account-settings-connections.html"
-                    class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-                <div data-i18n="Authentications">Authentications</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a
-                    href="auth-login-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Login</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-register-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Register</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="auth-forgot-password-basic.html"
-                    class="menu-link"
-                    target="_blank">
-                    <div data-i18n="Basic">Forgot Password</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
+            
             <!-- Forms & Tables -->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Form &amp; Tables</span>
@@ -244,12 +180,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item  active">
-                  <a href="forms-basic-inputs.html" class="menu-link active">
+                  <a  th:href="@{/admin/orders/page}" class="menu-link active">
                     <div data-i18n="Basic Inputs">Order</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="forms-input-groups.html" class="menu-link">
+                  <a  th:href="@{/admin/orderDetails/page}" class="menu-link">
                     <div data-i18n="Input groups">Order Detail</div>
                   </a>
                 </li>
@@ -275,7 +211,7 @@
             </li>
             <!-- Tables -->
             <li class="menu-item">
-              <a href="tables-basic.html" class="menu-link">
+              <a th:href="@{/admin/customers/page}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Tables">Account</div>
               </a>

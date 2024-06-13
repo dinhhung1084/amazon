@@ -1,5 +1,7 @@
 package edu.poly.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ public class CustomerDto {
     private String email;
     private String phoneNumber;
     private String photo;
+    private MultipartFile imgFile;
     private boolean isActivated;
     private boolean isAdmin;
 }

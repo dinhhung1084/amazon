@@ -27,7 +27,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         return orderDetailRepository.findByIsActivatedTrue(pageable);
     }
 
-    public void deactivateOrder(Integer orderId) {
+    public void deactivateOrderDetail(Integer orderId) {
         Optional<OrderDetail> orderOpt = orderDetailRepository.findById(orderId);
         if (orderOpt.isPresent()) {
             OrderDetail orderDetail = orderOpt.get();
