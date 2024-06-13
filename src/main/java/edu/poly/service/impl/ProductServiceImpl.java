@@ -25,6 +25,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByNameContainingAndStockTrue(keywords, pageable);
     }
 
+    public List<Product> findStock() {
+        return productRepository.findByStockTrue();
+    }
+
     public Page<Product> findPaginatedActivated(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return productRepository.findByStockTrue(pageable);

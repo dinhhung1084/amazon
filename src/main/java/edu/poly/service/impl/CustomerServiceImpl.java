@@ -25,6 +25,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByNameContainingAndIsActivatedTrue(keywords, pageable);
     }
 
+    public List<Customer> findActivatedCustomer() {
+        return customerRepository.findByIsActivatedTrue();
+    }
+
     public Page<Customer> findPaginatedActivated(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return customerRepository.findByIsActivatedTrue(pageable);

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import edu.poly.domain.Product;
 
 public interface ProductService {
+    List<Product> findStock();
 
     public Page<Product> searchActiveProducts(String keywords, Pageable pageable);
 

@@ -11,6 +11,8 @@ import edu.poly.domain.Customer;
 
 public interface CustomerService {
 
+    List<Customer> findActivatedCustomer();
+
     Page<Customer> findPaginatedActivated(int page, int size);
 
     Page<Customer> searchActiveCustomers(String keywords, Pageable pageable);
