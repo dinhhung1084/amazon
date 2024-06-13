@@ -1,60 +1,70 @@
-//package edu.poly.service;
-//
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.function.Function;
-//
-//import org.springframework.data.domain.Example;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.data.domain.Sort;
-//import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
-//
-//import edu.poly.domain.Category;
-//
-//public interface CategoryService {
-//
-//	void deleteAll();
-//
-//	void deleteAll(Iterable<? extends Category> entities);
-//
-//	void deleteAllById(Iterable<? extends Integer> ids);
-//
-//	void delete(Category entity);
-//
-//	Category getById(Integer id);
-//
-//	void deleteById(Integer id);
-//
-//	long count();
-//
-//	Category getOne(Integer id);
-//
-//	<S extends Category> boolean exists(Example<S> example);
-//
-//	void deleteAllByIdInBatch(Iterable<Integer> ids);
-//
-//	boolean existsById(Integer id);
-//
-//	Optional<Category> findById(Integer id);
-//
-//	List<Category> findAllById(Iterable<Integer> ids);
-//
-//	List<Category> findAll();
-//
-//	<S extends Category> List<S> saveAllAndFlush(Iterable<S> entities);
-//
-//	<S extends Category> S saveAndFlush(S entity);
-//
-//	Page<Category> findAll(Pageable pageable);
-//
-//	void flush();
-//
-//	List<Category> findAll(Sort sort);
-//
-//	<S extends Category> List<S> saveAll(Iterable<S> entities);
-//
-//	<S extends Category> S save(S entity);
-//
-//	
-//}
+package edu.poly.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import edu.poly.domain.Category;
+
+public interface CategoryService {
+
+    <S extends Category> S save(S entity);
+
+    <S extends Category> List<S> saveAll(Iterable<S> entities);
+
+    List<Category> findAll(Sort sort);
+
+    void flush();
+
+    List<Category> findIsActivated();
+
+    Page<Category> findPaginatedActivated(int page, int size);
+
+    Page<Category> searchActiveProducts(String keywords, Pageable pageable);
+
+    Page<Category> findAll(Pageable pageable);
+
+    <S extends Category> S saveAndFlush(S entity);
+
+    <S extends Category> List<S> saveAllAndFlush(Iterable<S> entities);
+
+    List<Category> findAll();
+
+    List<Category> findAllById(Iterable<Integer> ids);
+
+    void deleteInBatch(Iterable<Category> entities);
+
+    Optional<Category> findById(Integer id);
+
+    void deactivateCategory(Integer categoryId);
+
+    void deleteAllInBatch(Iterable<Category> entities);
+
+    boolean existsById(Integer id);
+
+    void deleteAllByIdInBatch(Iterable<Integer> ids);
+
+    void deleteAllInBatch();
+
+    Category getOne(Integer id);
+
+    long count();
+
+    void deleteById(Integer id);
+
+    Category getById(Integer id);
+
+    void delete(Category entity);
+
+    void deleteAllById(Iterable<? extends Integer> ids);
+
+    Category getReferenceById(Integer id);
+
+    void deleteAll(Iterable<? extends Category> entities);
+
+    void deleteAll();
+
+}
