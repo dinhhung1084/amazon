@@ -31,30 +31,88 @@
 
 			<div class="container">
 				<a class="navbar-brand" th:href="@{/site/home}">Amazon<span>.</span></a>
-
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+	
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+					aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-
+	
+	
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item ">
-							<a class="nav-link"  th:href="@{/site/home}" >Home</a>
+	
+						<li th:if="${customer != null and customer.activated}">
+							<a class="nav-link" href="#">Hello, <span th:text="${customer.name}"></span></a>
 						</li>
-						<li><a class="nav-link"  th:href="@{/site/shop}">Shop</a></li>
-						<li><a class="nav-link"  th:href="@{/site/about}">About us</a></li>
-						<li><a class="nav-link"  th:href="@{/site/services}">Services</a></li>
-						<li class="active"><a class="nav-link"  th:href="@{/site/blog}">Blog</a></li>
-						<li><a class="nav-link"  th:href="@{/site/contact}">Contact us</a></li>
+						<li>
+							<a class="nav-link" th:href="@{/site/home}">Home</a>
+						</li>
+						<li><a class="nav-link" th:href="@{/site/shop}">Shop</a></li>
+	
+						<li><a class="nav-link" th:href="@{/site/about}">About us</a></li>
+						<li><a class="nav-link" th:href="@{/site/services}">Services</a></li>
+						<li class="nav-item active"><a class="nav-link" th:href="@{/site/blog}">Blog</a></li>
+						<li><a class="nav-link" th:href="@{/site/contact}">Contact us</a></li>
 					</ul>
-
+	
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-						<li><a class="nav-link" href="#"><img src="/images/user.svg"></a></li>
-						<li><a class="nav-link" th:href="@{/site/cart}"><img src="/images/cart.svg"></a></li>
+						<!-- <li ><a class="nav-link" href="#"><img src="/images/user.svg"></a></li> -->
+						<li th:if="${customer == null}"><a class="nav-link" th:href="@{/account/login}"><img
+									src="/images/user.svg"></a></li>
+	
+						<li th:if="${customer != null and customer.activated}"
+							class="nav-item navbar-dropdown dropdown-user dropdown">
+							<a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+								data-bs-toggle="dropdown">
+								<div class="avatar avatar-online">
+									<img src="/images/user.svg" alt
+										class="w-px-40 bg-label-secondary h-auto rounded-circle" />
+								</div>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end">
+								<li class="ms-3">
+										<span class="fw-semibold d-block" th:text="${customer.name}"></span>
+										<small th:if="${customer.isAdmin}" class="text-muted">Admin</small>
+										<small th:unless="${customer.isAdmin}" class="text-muted">User</small>
+								</li>
+								<li>
+									<div class="dropdown-divider"></div>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">
+										<i class="bx bx-user me-2"></i>
+										<span class="align-middle">My Profile</span>
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">
+										<i class="bx bx-cog me-2"></i>
+										<span class="align-middle">Settings</span>
+									</a>
+								</li>
+								<li th:if="${customer.isAdmin}">
+									<a class="dropdown-item" th:href="@{/admin/dashboard}">
+										<i class="bx bx-user me-2"></i>
+										<span class="align-middle">Admin View</span>
+									</a>
+								</li>
+								<li>
+									<div class="dropdown-divider"></div>
+								</li>
+								<li>
+									<a class="dropdown-item" th:href="@{/account/logout}">
+										<i class="bx bx-power-off me-2"></i>
+										<span class="align-middle">Log Out</span>
+									</a>
+								</li>
+							</ul>
+						</li>
+	
+	
+						<li th:if="${customer != null and customer.activated}"><a class="nav-link" th:href="@{/site/cart}"><img src="/images/cart.svg"></a></li>
 					</ul>
 				</div>
 			</div>
-				
 		</nav>
 		<!-- End Header/Navigation -->
 

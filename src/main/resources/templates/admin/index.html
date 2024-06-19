@@ -241,22 +241,22 @@
                   <a class="nav-link dropdown-toggle hide-arrow"
                     href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="/images/avatars/1.png" alt
-                        class="w-px-40 h-auto rounded-circle" />
+                      <img th:src="@{'/images/' + ${customer.photo}}" alt
+                        class="w-px-40 bg-label-secondary h-auto rounded-circle" />
                     </div>
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
+                  <ul  th:if="${customer != null and customer.activated}" class="dropdown-menu dropdown-menu-end">
                     <li>
                       <a class="dropdown-item" href="#">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="/images/avatars/1.png" alt
-                                class="w-px-40 h-auto rounded-circle" />
+                              <img th:src="@{'/images/' + ${customer.photo}}" alt
+                                class="w-px-40 bg-label-secondary  h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
+                            <span class="fw-semibold d-block"><span th:text="${customer.name}"></span></span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -266,9 +266,9 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" th:href="@{/site/home}">
                         <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
+                        <span class="align-middle">Site View</span>
                       </a>
                     </li>
                     <li>
@@ -278,20 +278,10 @@
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span
-                            class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
-                    <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" th:href="@{/account/logout}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -934,25 +924,11 @@
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank"
-                    class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/"
-                    class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank"
-                    class="footer-link me-4">More Themes</a>
-
+                  , Copyright with ❤️ by
                   <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                    href="https://themeselection.com"
                     target="_blank"
-                    class="footer-link me-4">Documentation</a>
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4">Support</a>
+                    class="footer-link fw-bolder">Dinh Hung</a>
                 </div>
               </div>
             </footer>
@@ -970,12 +946,6 @@
     </div>
     <!-- / Layout wrapper -->
 
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
-    </div>
 
     <!-- Core JS -->
     <!-- build:js assets//vendor/js/core.js -->

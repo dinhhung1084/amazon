@@ -26,11 +26,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import constant.SessionAttr;
+import edu.poly.domain.Customer;
 import edu.poly.domain.Product;
 import edu.poly.model.ProductDto;
 import edu.poly.service.ProductService;
 import edu.poly.service.SessionService;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -44,6 +47,9 @@ public class ProductController {
 	SessionService sessionService;
 
 	@Autowired
+	HttpSession session;
+
+	@Autowired
 	private ServletContext servletContext;
 
 	@RequestMapping("page")
@@ -51,6 +57,8 @@ public class ProductController {
 			@RequestParam("p") Optional<Integer> p) {
 		int currentPage = p.orElse(0);
 		Page<Product> page = productService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("products", page);
 		model.addAttribute("product", new Product());
 		return "admin/products";
@@ -65,6 +73,8 @@ public class ProductController {
 			model.addAttribute("product", entity);
 			int currentPage = p.orElse(0);
 			Page<Product> page = productService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("products", page);
 			return new ModelAndView("admin/products", model);
 		}
@@ -78,6 +88,8 @@ public class ProductController {
 		productService.setStockToFalse(productId);
 		int currentPage = p.orElse(0);
 		Page<Product> page = productService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("products", page);
 		model.addAttribute("product", new Product());
 		model.addAttribute("message", "Product is deleted");
@@ -118,6 +130,8 @@ public class ProductController {
 
 		product.setStock(true);
 		product.setCreateDate(new Date());
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		productService.save(product);
 		return new ModelAndView("redirect:/admin/products/page", model);
 
@@ -131,12 +145,16 @@ public class ProductController {
 		if (StringUtils.hasText(kwords)) {
 			Pageable pageable = PageRequest.of(p.orElse(0), 5);
 			Page<Product> page = productService.searchActiveProducts(kwords, pageable);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("products", page);
 			model.addAttribute("keywords", kwords);
 			model.addAttribute("product", new Product());
 		} else {
 			int currentPage = p.orElse(0);
 			Page<Product> page = productService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("products", page);
 			model.addAttribute("keywords", kwords);
 			model.addAttribute("product", new Product());

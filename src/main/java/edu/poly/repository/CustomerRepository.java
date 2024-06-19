@@ -16,5 +16,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     Page<Customer> findByIsActivatedTrue(Pageable pageable);
 
+    Customer findByUsernameAndPasswordAndIsActivatedTrue(String username, String password);
+
     Page<Customer> findByNameContainingAndIsActivatedTrue(String keywords, Pageable pageable);
 }

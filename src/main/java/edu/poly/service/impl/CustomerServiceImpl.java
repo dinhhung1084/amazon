@@ -3,6 +3,7 @@ package edu.poly.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     public CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+
+    public Customer register(Customer customer) {
+        try {
+            return customerRepository.save(customer);
+        } catch (DataIntegrityViolationException e) {
+            throw new RuntimeException("Username already exists!");
+        }
+    }
+
+    public Customer login(String username, String password) {
+        return customerRepository.findByUsernameAndPasswordAndIsActivatedTrue(username, password);
     }
 
     public Page<Customer> searchActiveCustomers(String keywords, Pageable pageable) {

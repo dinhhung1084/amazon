@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import constant.SessionAttr;
 import edu.poly.domain.Category;
+import edu.poly.domain.Customer;
 import edu.poly.model.CategoryDto;
 import edu.poly.service.CategoryService;
 import edu.poly.service.SessionService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -36,11 +39,16 @@ public class CategoryController {
 	@Autowired
 	SessionService sessionService;
 
+	@Autowired
+	HttpSession session;
+
 	@RequestMapping("page")
 	public String index(Model model,
 			@RequestParam("p") Optional<Integer> p) {
 		int currentPage = p.orElse(0);
 		Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("categories", page);
 		model.addAttribute("category", new Category());
 		return "admin/categories";
@@ -57,9 +65,12 @@ public class CategoryController {
 			model.addAttribute("category", dto);
 			int currentPage = p.orElse(0);
 			Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("categories", page);
 			return new ModelAndView("admin/categories", model);
 		}
+
 		model.addAttribute("message", "Category is not existed");
 		return new ModelAndView("forward:admin/categories", model);
 	}
@@ -72,6 +83,8 @@ public class CategoryController {
 		Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
 		model.addAttribute("categories", page);
 		model.addAttribute("category", new Category());
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("message", "Category is deleted");
 		return new ModelAndView("admin/categories", model); // return to file
 	}
@@ -82,6 +95,8 @@ public class CategoryController {
 		if (result.hasErrors()) {
 			int currentPage = p.orElse(0);
 			Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("categories", page);
 			return new ModelAndView("/admin/categories", model);
 		}
@@ -89,6 +104,8 @@ public class CategoryController {
 		BeanUtils.copyProperties(dto, entity);
 		entity.setActivated(true);
 		categoryService.save(entity);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		return new ModelAndView("redirect:/admin/categories/page", model);
 	}
 
@@ -100,12 +117,16 @@ public class CategoryController {
 		if (StringUtils.hasText(kwords)) {
 			Pageable pageable = PageRequest.of(p.orElse(0), 5);
 			Page<Category> page = categoryService.searchActiveProducts(kwords, pageable);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("categories", page);
 			model.addAttribute("category", new Category());
 			model.addAttribute("keywords", kwords);
 		} else {
 			int currentPage = p.orElse(0);
 			Page<Category> page = categoryService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("categories", page);
 			model.addAttribute("keywords", kwords);
 			model.addAttribute("category", new Category());

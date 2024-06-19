@@ -25,11 +25,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import constant.SessionAttr;
 import edu.poly.domain.Customer;
 import edu.poly.model.CustomerDto;
 import edu.poly.service.CustomerService;
 import edu.poly.service.SessionService;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -45,11 +47,16 @@ public class CustomerController {
 	@Autowired
 	private ServletContext servletContext;
 
+	@Autowired
+	HttpSession session;
+
 	@RequestMapping("page")
 	public String index(Model model,
 			@RequestParam("p") Optional<Integer> p) {
 		int currentPage = p.orElse(0);
 		Page<Customer> page = customerService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("custom", customer);
 		model.addAttribute("customers", page);
 		model.addAttribute("customer", new Customer());
 		return "admin/customers";
@@ -64,6 +71,8 @@ public class CustomerController {
 			model.addAttribute("customer", entity);
 			int currentPage = p.orElse(0);
 			Page<Customer> page = customerService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("custom", customer);
 			model.addAttribute("customers", page);
 			return new ModelAndView("admin/customers", model);
 		}
@@ -77,6 +86,8 @@ public class CustomerController {
 		customerService.deactivateCustomer(customerId);
 		int currentPage = p.orElse(0);
 		Page<Customer> page = customerService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("custom", customer);
 		model.addAttribute("customers", page);
 		model.addAttribute("customer", new Customer());
 		model.addAttribute("message", "Customer is deleted");
@@ -115,6 +126,8 @@ public class CustomerController {
 		}
 
 		customer.setActivated(true);
+		Customer custom = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("custom", custom);
 		customerService.save(customer);
 		return new ModelAndView("redirect:/admin/customers/page", model);
 	}
@@ -127,12 +140,16 @@ public class CustomerController {
 		if (StringUtils.hasText(kwords)) {
 			Pageable pageable = PageRequest.of(p.orElse(0), 5);
 			Page<Customer> page = customerService.searchActiveCustomers(kwords, pageable);
+			Customer custom = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("custom", custom);
 			model.addAttribute("customers", page);
 			model.addAttribute("keywords", kwords);
 			model.addAttribute("customer", new Customer());
 		} else {
 			int currentPage = p.orElse(0);
 			Page<Customer> page = customerService.findPaginatedActivated(currentPage, 5);
+			Customer custom = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("custom", custom);
 			model.addAttribute("customers", page);
 			model.addAttribute("keywords", kwords);
 			model.addAttribute("customer", new Customer());

@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import constant.SessionAttr;
+import edu.poly.domain.Customer;
 import edu.poly.domain.Order;
 import edu.poly.service.OrderService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -26,11 +29,16 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
+	@Autowired
+	HttpSession session;
+
 	@RequestMapping("page")
 	public String index(Model model,
 			@RequestParam("p") Optional<Integer> p) {
 		int currentPage = p.orElse(0);
 		Page<Order> page = orderService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("orders", page);
 		model.addAttribute("order", new Order());
 		return "admin/orders";
@@ -45,6 +53,8 @@ public class OrderController {
 			model.addAttribute("order", entity);
 			int currentPage = p.orElse(0);
 			Page<Order> page = orderService.findPaginatedActivated(currentPage, 5);
+			Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+			model.addAttribute("customer", customer);
 			model.addAttribute("orders", page);
 			return new ModelAndView("admin/orders", model);
 		}
@@ -58,6 +68,8 @@ public class OrderController {
 		orderService.deactivateOrder(orderId);
 		int currentPage = p.orElse(0);
 		Page<Order> page = orderService.findPaginatedActivated(currentPage, 5);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		model.addAttribute("orders", page);
 		model.addAttribute("order", new Order());
 		model.addAttribute("message", "Order is deleted");
@@ -82,6 +94,8 @@ public class OrderController {
 		}
 		entity.setActivated(true);
 		orderService.save(entity);
+		Customer customer = (Customer) session.getAttribute(SessionAttr.CURRENT_USER);
+		model.addAttribute("customer", customer);
 		return new ModelAndView("redirect:/admin/orders/page", model);
 	}
 

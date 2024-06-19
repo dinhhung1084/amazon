@@ -13,6 +13,10 @@ public interface CustomerService {
 
     List<Customer> findActivatedCustomer();
 
+    Customer register(Customer customer);
+
+    Customer login(String username, String password);
+
     Page<Customer> findPaginatedActivated(int page, int size);
 
     Page<Customer> searchActiveCustomers(String keywords, Pageable pageable);
