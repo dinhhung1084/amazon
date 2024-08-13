@@ -8,8 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import edu.poly.domain.Customer;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface CustomerService {
+
+    Customer findByUserName(String username);
+
+//    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     List<Customer> findActivatedCustomer();
 

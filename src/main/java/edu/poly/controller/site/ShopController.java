@@ -3,6 +3,7 @@ package edu.poly.controller.site;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("site/shop")
 public class ShopController {
+    @Autowired
+    HttpServletRequest request;
 
     @Autowired
     ProductService productService;

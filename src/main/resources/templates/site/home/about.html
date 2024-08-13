@@ -6,7 +6,7 @@
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
 <!doctype html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,7 +42,25 @@
 	
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-	
+
+<!--						<h3 th:unless="${#request.remoteUser}">-->
+<!--							Chưa đăng nhập-->
+<!--						</h3>-->
+<!--						<ul th:="${#request.remoteUser}">-->
+<!--							<li th:if="${#request.isUserInRole('ADMIN')}">ADMIN</li>-->
+<!--							<li th:if="${#request.isUserInRole('USER')}">USER</li>-->
+<!--							<li th:if="${#request.isUserInRole('GUEST')}">GUEST</li>-->
+<!--						</ul>-->
+
+<!--						<h3 sec:authorize="!isAuthenticated()">-->
+<!--							Chưa đăng nhập-->
+<!--						</h3>-->
+<!--						<ul  sec:authorize="isAuthenticated()">-->
+<!--							<li sec:authorize="hasRole('ADMIN')">ADMIN</li>-->
+<!--							<li sec:authorize="hasAnyRole('USER','ADMIN')">AMIN OR USER</li>-->
+<!--							<li sec:authorize="hasRole('GUEST')">GUEST</li>-->
+<!--						</ul>-->
+
 						<li th:if="${customer != null and customer.activated}">
 							<a class="nav-link" href="#">Hello, <span th:text="${customer.name}"></span></a>
 						</li>

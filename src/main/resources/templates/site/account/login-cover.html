@@ -69,6 +69,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-xl-6 col-md-8">
+
               <form th:action="@{/account/login/check}" method="post" 
               th:object="${account}" class="bg-white rounded shadow-5-strong p-5">
                 <!-- Email input -->
@@ -76,13 +77,13 @@
                       ><span th:text="${message}"></span
                     ></small>
                 <div class="form-outline mb-4" data-mdb-input-init>
-                  <input th:field="*{username}"   id="form1Example1" class="form-control" />
+                  <input th:field="*{username}" name="username"  id="form1Example1" class="form-control" />
                   <label class="form-label" for="form1Example1">User Name</label>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline mb-4" data-mdb-input-init>
-                  <input th:field="*{password}"  type="password" id="form1Example2" class="form-control" />
+                  <input th:field="*{password}" name="password"  type="password" id="form1Example2" class="form-control" />
                   <label class="form-label" for="form1Example2">Password</label>
                 </div>
 

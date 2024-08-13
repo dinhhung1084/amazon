@@ -47,6 +47,7 @@ public class AccountController {
 		}
 	}
 
+
 	@GetMapping("register")
 	public String register(Model model) {
 		model.addAttribute("account", new CustomerDto());

@@ -3,11 +3,16 @@ package edu.poly.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.poly.domain.Customer;
@@ -28,6 +33,27 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (DataIntegrityViolationException e) {
             throw new RuntimeException("Username already exists!");
         }
+    }
+
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        try {
+//            Customer customer = customerRepository.findByUsernameAndIsActivatedTrue(username);
+//            String password = customer.getPassword();
+//            boolean roles = customer.isAdmin();
+//            String role;
+//            if (roles){
+//                role = "ADMIN";
+//            }else{
+//                role = "USER";
+//            }
+//            return User.withUsername(username).password(bCryptPasswordEncoder.encode(password)).roles(role).build();
+//        }catch (Exception e){
+//            throw new UsernameNotFoundException(username + "User not found");
+//        }
+//    }
+
+    public Customer findByUserName(String username) {
+        return customerRepository.findByUsernameAndIsActivatedTrue(username);
     }
 
     public Customer login(String username, String password) {
