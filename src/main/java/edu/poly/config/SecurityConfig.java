@@ -1,24 +1,105 @@
 package edu.poly.config;
 
+import edu.poly.domain.Customer;
+import edu.poly.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
 
+//    @Autowired
+//    CustomerRepository customerRepository;
+
+//    public SecurityConfig(CustomerRepository customerRepository) {
+//        this.customerRepository = customerRepository;
+//    }
+
+//    @Bean
+//    BCryptPasswordEncoder bCryptPasswordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     @Bean
-    BCryptPasswordEncoder getBCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http.authorizeRequests()
+                .anyRequest().permitAll()
+                .and().exceptionHandling(exception -> exception
+                        .accessDeniedPage("/403")
+                );
+
+        return http.build();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return username -> {
+//            try {
+//                Customer customer = customerRepository.findByUsernameAndIsActivatedTrue(username);
+//                if (customer == null) {
+//                    throw new UsernameNotFoundException(username + " not found");
+//                }
+//                String role = customer.isAdmin() ? "ADMIN" : "USER";
+//                return org.springframework.security.core.userdetails.User
+//                        .withUsername(username)
+//                        .password(bCryptPasswordEncoder().encode(customer.getPassword()))
+//                        .roles(role)
+//                        .build();
+//            } catch (Exception e) {
+//                throw new UsernameNotFoundException(username + " not found");
+//            }
+//        };
+//    }
+
+
+
+//
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers("/resources/**"); // Bỏ qua bảo mật cho các tài nguyên tĩnh
+//    }
+
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        // Tạo người dùng với quyền admin
+//        UserDetails adminUser = User.withUsername("admin")
+//                .password("{noop}password") // {noop} để không mã hóa mật khẩu
+//                .authorities("ROLE_ADMIN") // Thiết lập quyền admin
+//                .build();
+//
+//        // Tạo người dùng thông thường
+//        UserDetails regularUser = User.withUsername("user")
+//                .password("{noop}password")
+//                .authorities("ROLE_USER")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(adminUser, regularUser);
+//    }
+
+
+
+
 }
 
 
 
-//
-//
 //import edu.poly.service.CustomerService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
