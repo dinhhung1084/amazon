@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import constant.SessionAttr;
+import edu.poly.constant.SessionAttr;
 import edu.poly.domain.Customer;
 import edu.poly.domain.Order;
 import edu.poly.service.OrderService;

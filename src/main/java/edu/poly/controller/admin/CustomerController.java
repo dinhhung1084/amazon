@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import constant.SessionAttr;
+import edu.poly.constant.SessionAttr;
 import edu.poly.domain.Customer;
 import edu.poly.model.CustomerDto;
 import edu.poly.service.CustomerService;

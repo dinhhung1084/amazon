@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import constant.SessionAttr;
+import edu.poly.constant.SessionAttr;
 import edu.poly.domain.Customer;
 import edu.poly.domain.Product;
 import edu.poly.service.CustomerService;

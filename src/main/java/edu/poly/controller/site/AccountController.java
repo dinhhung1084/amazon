@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import constant.SessionAttr;
+import edu.poly.constant.SessionAttr;
 import edu.poly.domain.Customer;
 import edu.poly.model.CustomerDto;
 import edu.poly.service.CustomerService;
